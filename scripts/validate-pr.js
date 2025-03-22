@@ -72,7 +72,7 @@ async function sendErrorMsg(message) {
     owner,
     repo,
     pull_number,
-    event: 'REQUEST_CHANGES',
+    event: 'COMMENT',
     body: message,
   });
 }
