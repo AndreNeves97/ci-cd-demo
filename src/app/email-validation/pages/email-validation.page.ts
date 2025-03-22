@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { EmailValidationService } from '../services/email-validation.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-email-validation',
@@ -7,13 +8,17 @@ import { EmailValidationService } from '../services/email-validation.service';
     <div>
       <input [(ngModel)]="email" placeholder="Enter your email" />
       <button (click)="checkEmail()">Validate Email</button>
-      <p *ngIf="isValid !== null">Email is {{ isValid ? 'valid' : 'invalid' }}</p>
+
+      @if (isValid !== null) {
+        <p>Email is {{ isValid ? 'valid' : 'invalid' }}</p>
+      }
     </div>
   `,
   styles: [],
+  imports: [FormsModule],
 })
 export class EmailValidationPage {
-  email: string = '';
+  email = '';
   isValid: boolean | null = null;
 
   constructor(private emailValidationService: EmailValidationService) {}

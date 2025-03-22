@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 import { EmailValidationPage } from './email-validation.page';
 import { EmailValidationService } from '../services/email-validation.service';
 
@@ -9,8 +8,7 @@ describe('EmailValidationPage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EmailValidationPage],
-      imports: [FormsModule],
+      imports: [EmailValidationPage],
       providers: [EmailValidationService],
     }).compileComponents();
   });

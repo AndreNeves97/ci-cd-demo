@@ -37,6 +37,12 @@ module.exports = tseslint.config(
           style: "kebab-case",
         },
       ],
+      "@angular-eslint/component-class-suffix": [
+        "error",
+        {
+          suffixes: ["Component", "Page"],
+        },
+      ],
     },
   },
   {
