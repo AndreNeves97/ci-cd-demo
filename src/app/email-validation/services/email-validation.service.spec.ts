@@ -13,11 +13,14 @@ describe('EmailValidationService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should validate correct email', () => {
-    expect(service.validateEmail('test@example.com')).toBe(true);
-  });
+  test.each(['test@example.com', 'test.test@gmail.com', 'test@gmail.com.br'])(
+    'should validate correct email [%s]',
+    (email) => {
+      expect(service.validateEmail(email)).toBe(true);
+    },
+  );
 
-  it('should invalidate incorrect email', () => {
-    expect(service.validateEmail('test@.com')).toBe(false);
+  test.each(['test@.com', 'test@gmail.com.'])('should invalidate incorrect email [%s]', (email) => {
+    expect(service.validateEmail(email)).toBe(false);
   });
 });

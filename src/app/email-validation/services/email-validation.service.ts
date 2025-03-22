@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class EmailValidationService {
   validateEmail(email: string): boolean {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailPattern = /^[^\s@]+@[^\s@.]+\.[^\s@.]+(\.[^\s@.]+)*$/;
     return emailPattern.test(email);
   }
 }
