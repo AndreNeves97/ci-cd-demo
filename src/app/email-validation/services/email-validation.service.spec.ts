@@ -20,10 +20,7 @@ describe('EmailValidationService', () => {
     },
   );
 
-  test.each(['test@.com', 'test@gmail.com.'])(
-    'should invalidate incorrect email [%s]',
-    (email) => {
-      expect(service.validateEmail(email)).toBe(false);
-    },
-  );
+  test.each(['test@.com', 'test@gmail.com.'])('should invalidate incorrect email [%s]', (email) => {
+    expect(service.validateEmail(email)).toBe(false);
+  });
 });
