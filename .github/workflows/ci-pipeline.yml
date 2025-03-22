@@ -12,6 +12,7 @@ jobs:
     permissions:
       pull-requests: write
       contents: write
+      checks: write
 
     steps:
       - name: Checkout repository
@@ -54,6 +55,14 @@ jobs:
           path: reports/jest-junit.xml
           reporter: jest-junit
           fail-on-error: false
-  
+
       - name: Run build
         run: npm run build
+
+      - name: Deploy preview to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_CI_CD_DEMO_1AE31 }}
+          expires: 1d
+          projectId: ci-cd-demo-1ae31
