@@ -5,9 +5,9 @@ const path = require('path');
 const token = process.env.GITHUB_TOKEN;
 const owner = process.env.REPO_OWNER;
 const repo = process.env.REPO_NAME;
-const pull_number = process.env.GITHUB_REF.split('/').pop();
+const pull_number = process.env.PR_REF.split('/').pop();
 
-console.log({pull_number})
+console.log({pull_number, ref: process.env.PR_REF})
 
 const octokit = new Octokit({ auth: token });
 
