@@ -6,8 +6,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-email-validation',
   template: `
     <div>
-      <input [(ngModel)]="email" placeholder="Enter your email" />
-      <button (click)="checkEmail()">Validate Email</button>
+      <input [(ngModel)]="email" (ngModelChange)="onEmailChange()" placeholder="Enter your email" />
 
       @if (isValid !== null) {
         <p>Email is {{ isValid ? 'valid' : 'invalid' }}</p>
@@ -22,6 +21,10 @@ export class EmailValidationPage {
   isValid: boolean | null = null;
 
   constructor(private emailValidationService: EmailValidationService) {}
+
+  onEmailChange() {
+    this.checkEmail();
+  }
 
   checkEmail() {
     this.isValid = this.emailValidationService.validateEmail(this.email);
