@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-email-validation',
   template: `
     <div class="container">
-      <h1>Validação de email</h1>
+      <h1>Frontend BH</h1>
       <input
         [(ngModel)]="email"
         (ngModelChange)="onEmailChange()"
