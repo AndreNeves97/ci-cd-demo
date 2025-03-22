@@ -7,6 +7,8 @@ const owner = process.env.REPO_OWNER;
 const repo = process.env.REPO_NAME;
 const pull_number = process.env.GITHUB_REF.split('/').pop();
 
+console.log({pull_number})
+
 const octokit = new Octokit({ auth: token });
 
 async function validatePullRequest() {
