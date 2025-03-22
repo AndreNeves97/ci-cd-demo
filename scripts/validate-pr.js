@@ -43,7 +43,6 @@ async function validateTitle(title) {
   const version = packageJson.version;
   const versionPattern = new RegExp(`\\[${version}\\]`);
 
-  // Add your validation logic here
   if (!title || title.length < 10) {
     throw new Error('O título do PR é muito curto');
   }
@@ -60,7 +59,21 @@ async function verifyChangesOnCriticalFiles(files, head_commit_id) {
     const filename = file.filename;
 
     if (criticalFiles.includes(filename)) {
-      await sendReviewComment('Revise as alterações com atenção', 'RIGHT', 1, filename, head_commit_id);
+      const patch = file.patch;
+      const lines = patch.split('\n');
+      let lineNumber = 0;
+
+      for (const line of lines) {
+        if (line.startsWith('@@')) {
+          const match = line.match(/@@ \-\d+,\d+ \+(\d+),\d+ @@/);
+          if (match) {
+            lineNumber = parseInt(match[1], 10);
+            break;
+          }
+        }
+      }
+
+      await sendReviewComment('Revise as alterações com atenção', 'RIGHT', lineNumber, filename, head_commit_id);
     }
   });
 
@@ -72,7 +85,7 @@ async function sendErrorMsg(message) {
     owner,
     repo,
     pull_number,
-    event: 'REQUEST_CHANGES',
+    event: 'COMMENT',
     body: message,
   });
 }

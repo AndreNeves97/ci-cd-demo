@@ -81,6 +81,7 @@
             "lintFilePatterns": [
               "src/**/*.ts",
               "src/**/*.html"
+              
             ]
           }
         }
