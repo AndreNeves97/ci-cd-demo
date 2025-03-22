@@ -9,6 +9,9 @@ jobs:
   ci-checks:
     name: Run CI Checks
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
 
     steps:
       - name: Checkout repository
