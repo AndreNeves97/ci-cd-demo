@@ -9,6 +9,9 @@ jobs:
   ci-checks:
     name: Run CI Checks
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -19,8 +22,24 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
+
       - name: Install dependencies
         run: npm ci
+
+      - name: Validate pull request information
+        run: node scripts/validate-pr.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_OWNER: ${{ github.repository_owner }}
+          REPO_NAME: ${{ github.event.repository.name }}
+          PR_URL: ${{ github.event.pull_request._links.self.href }}
 
       - name: Run lint
         run: npm run lint
