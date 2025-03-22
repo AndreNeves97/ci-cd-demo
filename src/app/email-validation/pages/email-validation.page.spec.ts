@@ -6,20 +6,18 @@ import { EmailValidationService } from '../services/email-validation.service';
 describe('EmailValidationPage', () => {
   let component: EmailValidationPage;
   let fixture: ComponentFixture<EmailValidationPage>;
-  let emailValidationService: EmailValidationService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [EmailValidationPage],
       imports: [FormsModule],
-      providers: [EmailValidationService]
+      providers: [EmailValidationService],
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(EmailValidationPage);
     component = fixture.componentInstance;
-    emailValidationService = TestBed.inject(EmailValidationService);
     fixture.detectChanges();
   });
 

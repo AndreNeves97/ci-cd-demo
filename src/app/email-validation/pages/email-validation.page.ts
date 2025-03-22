@@ -7,12 +7,10 @@ import { EmailValidationService } from '../services/email-validation.service';
     <div>
       <input [(ngModel)]="email" placeholder="Enter your email" />
       <button (click)="checkEmail()">Validate Email</button>
-      <p *ngIf="isValid !== null">
-        Email is {{ isValid ? 'valid' : 'invalid' }}
-      </p>
+      <p *ngIf="isValid !== null">Email is {{ isValid ? 'valid' : 'invalid' }}</p>
     </div>
   `,
-  styles: []
+  styles: [],
 })
 export class EmailValidationPage {
   email: string = '';
